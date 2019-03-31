@@ -1,5 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
+var cors = require('cors')
 const crypto = require('crypto')
 const mongoose = require('mongoose')
 const multer = require('multer')
@@ -12,7 +14,7 @@ const app = express()
 //Middleware
 app.use(bodyParser.json())
 app.use(methodOverride('_method'))
-
+app.use(cors())
 //Mongo URI
 const mongoURI = 'mongodb://bartosz:test123@ds127736.mlab.com:27736/popcorn-time'
 //Mongo connection
@@ -44,14 +46,38 @@ const storage = new GridFsStorage({
     }
 });
 const upload = multer({ storage });
-
+app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
-    res.send("Hello")
+    res.send("hello")
 })
+
+app.get('/files', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    if(!files || files.length === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files)
+  })
+})
+
+app.get('/files/:filename', (req, res) => {
+  gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+    if(!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exist'
+      })
+    }
+    return res.json(file)
+  })
+})
+
 app.post('/upload', upload.single('file'), (req,res) => {
+    res.json({file: req.file})
     console.log(req.file)
-    res.send("file saved on server");
 })
+
 
 const PORT = process.env.PORT || 5000
 
