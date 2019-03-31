@@ -3,7 +3,17 @@ import axios from 'axios';
 
 class SimpleReactFileUpload extends React.Component { 
     state ={
-      file:null
+      file:null,
+      files: []
+    }
+    componentDidMount() {
+      axios.get('http://localhost:5000/files/')
+      .then(res => {
+        this.setState({files: res.data})
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   onChange = (e) => {
     this.setState({file:e.target.files[0]})
@@ -28,12 +38,21 @@ class SimpleReactFileUpload extends React.Component {
   }
 
   render() {
+    const { files } = this.state;
+    console.log(files)
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <input type="file" name="file" id="file" onChange={this.onChange} />
-        <button type="submit">Upload</button>
-      </form>
+      <div>
+        <form onSubmit={this.onFormSubmit}>
+          <h1>File Upload</h1>
+          <input type="file" name="file" id="file" onChange={this.onChange} />
+          <button type="submit">Upload</button>
+        </form>
+        {files.map(file => {
+          return (
+            <div>{file.filename}</div>
+          )
+        })}
+      </div>
    )
   }
 }

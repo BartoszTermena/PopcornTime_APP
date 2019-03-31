@@ -73,6 +73,18 @@ app.get('/files/:filename', (req, res) => {
   })
 })
 
+app.get('/video/:filename', (req, res) => {
+  gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+    if(!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exist'
+      })
+    }
+    const readstream = gfs.createReadStream(file.filename)
+    readstream.pipe(res)
+  })
+})
+
 app.post('/upload', upload.single('file'), (req,res) => {
     res.json({file: req.file})
     console.log(req.file)
