@@ -7,14 +7,17 @@ class Modal extends Component {
     return (
       <ProductConsumer>
         {(value) => {
-          return (
-          <div className="modal-container">          
+            if(value.file) {
+              return ( <div className="modal-container">          
             <div className="modal">
-              
+              <img src={`/files/${value.file}`} /> 
             </div>     
-          </div>
-          )
-        }}
+            </div> )
+            } else {
+              return (<div>Modal..</div>)
+            }
+          } 
+        }
       </ProductConsumer>
     )
   }

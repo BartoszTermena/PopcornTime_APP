@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProductConsumer } from '../context';
-
+import Modal from './modal/Modal'
 class Files extends React.Component { 
   render() {
     return (
@@ -17,10 +17,11 @@ class Files extends React.Component {
               {value.files.map(file => {
                 return (
                   <div>
-                    <a onClick={() => {value.getFile(file.filename)}}>{file.filename}</a>
+                    <a onClick={() => {value.getFile(file)}}>{file.filename}</a>
                   </div>
                 )
               })}
+            <Modal />
           </div>
         )
       }}

@@ -6,6 +6,7 @@ const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
   state ={
+    uploadedFile: null,
     file:null,
     files: []
   }
@@ -22,20 +23,16 @@ class ProductProvider extends Component {
       this.fetchFiles()
   }
 onChange = (e) => {
-  this.setState({file:e.target.files[0]})
+  this.setState({uploadedFile:e.target.files[0]})
 }
 getFile = (e) => {
-  axios.get(`http://localhost:5000/files/${e}`)
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  this.setState({
+    file: e
+  })
 }
 onFormSubmit = (e) => {
   e.preventDefault();
-  const file = this.state.file
+  const file = this.state.uploadedFile
   const formData = new FormData();
   formData.append('file', file)
   const config = {
@@ -64,7 +61,6 @@ onFormSubmit = (e) => {
           <Files />
           </ProductContext.Provider>
     )
-    
   }
 }
 
