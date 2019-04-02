@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Files from './Files'
+import Files from './components/Files'
 
 const ProductContext = React.createContext();
 
@@ -24,6 +24,15 @@ class ProductProvider extends Component {
 onChange = (e) => {
   this.setState({file:e.target.files[0]})
 }
+getFile = (e) => {
+  axios.get(`http://localhost:5000/files/${e}`)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
 onFormSubmit = (e) => {
   e.preventDefault();
   const file = this.state.file
@@ -44,15 +53,16 @@ onFormSubmit = (e) => {
 }
   render() {
     return (
-      <ProductContext.Provider 
-      value={{
-        ...this.state,
-        fetchFiles: this.fetchFiles,
-        onChange: this.onChange,
-        onFormSubmit: this.onFormSubmit
-      }}>
-      <Files />
-      </ProductContext.Provider>
+          <ProductContext.Provider 
+          value={{
+            ...this.state,
+            fetchFiles: this.fetchFiles,
+            onChange: this.onChange,
+            onFormSubmit: this.onFormSubmit,
+            getFile: this.getFile
+          }}>
+          <Files />
+          </ProductContext.Provider>
     )
     
   }

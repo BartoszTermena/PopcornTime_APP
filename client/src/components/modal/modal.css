@@ -1,0 +1,18 @@
+.modal-container {
+   position: fixed;
+   text-align:center;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(0,0,0,0.5);
+   color: var(--mainDark);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.modal {
+    background: var(--secondary-color);
+    box-shadow: 10px 15px rgba(0,0,0,0.07);
+    border-radius: 3px;
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProductConsumer } from './context';
+import { ProductConsumer } from '../context';
 
 class Files extends React.Component { 
   render() {
@@ -14,11 +14,13 @@ class Files extends React.Component {
               <input type="file" name="file" id="file" onChange={(e) => value.onChange(e)} />
               <button type="submit">Upload</button>
             </form>
-            {value.files.map(file => {
-              return (
-                <div>{file.filename}</div>
-              )
-            })}
+              {value.files.map(file => {
+                return (
+                  <div>
+                    <a onClick={() => {value.getFile(file.filename)}}>{file.filename}</a>
+                  </div>
+                )
+              })}
           </div>
         )
       }}
