@@ -1,6 +1,8 @@
 import React from 'react'
 import { ProductConsumer } from '../context';
 import Modal from './modal/Modal'
+
+
 class Files extends React.Component { 
   render() {
     return (
@@ -9,6 +11,7 @@ class Files extends React.Component {
         console.log(value.files)
         return (
           <div>
+
             <form onSubmit={(e) => value.onFormSubmit(e)}>
               <h1>File Upload</h1>
               <input type="file" name="file" id="file" onChange={(e) => value.onChange(e)} />
@@ -22,6 +25,7 @@ class Files extends React.Component {
                 )
               })}
             <Modal />
+            
           </div>
         )
       }}
