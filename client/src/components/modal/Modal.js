@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {ProductConsumer} from '../../context'
+import FilesContext from '../../context/files-context'
 import './modal.css'
 
 class Modal extends Component {    
   render() {
     return (
-      <ProductConsumer>
+      <FilesContext.Consumer>
         {(value) => {
             if(value.file) {
               return ( <div className="modal-container">          
@@ -18,7 +18,7 @@ class Modal extends Component {
             }
           } 
         }
-      </ProductConsumer>
+      </FilesContext.Consumer>
     )
   }
 }

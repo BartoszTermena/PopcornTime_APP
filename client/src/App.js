@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import {ProductProvider} from './context'
+import React from 'react'
+import GlobalState from './context/GlobalState'
 import Nav from './components/navbar/Nav'
+import Files from './components/Files'
 import "./App.css"
 
-export default class App extends Component {
-  render() {
-    return (
-      <div>
-        <Nav />
-        <ProductProvider />
-      </div>
-    )
-  }
+const App = props => {
+  return (
+    <GlobalState>
+      <Nav />
+      <Files />
+    </GlobalState>
+  )
 }
+export default App

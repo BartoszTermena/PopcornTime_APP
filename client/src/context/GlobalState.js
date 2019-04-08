@@ -1,27 +1,25 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import Files from './components/Files'
+import FileContext from './files-context'
 
-const ProductContext = React.createContext();
-
-class ProductProvider extends Component {
-  state ={
-    uploadedFile: null,
-    file:null,
-    files: []
-  }
-  fetchFiles = () => {
-    axios.get('http://localhost:5000/files/')
-    .then(res => {
-      this.setState({files: res.data})
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
-  componentDidMount(){
-      this.fetchFiles()
-  }
+class GlobalState extends Component {
+state ={
+  uploadedFile: null,
+  file:null,
+  files: []
+}
+fetchFiles = () => {
+  axios.get('http://localhost:5000/files/')
+  .then(res => {
+    this.setState({files: res.data})
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+componentDidMount(){
+    this.fetchFiles()
+}
 onChange = (e) => {
   this.setState({uploadedFile:e.target.files[0]})
 }
@@ -50,7 +48,7 @@ onFormSubmit = (e) => {
 }
   render() {
     return (
-          <ProductContext.Provider 
+          <FileContext.Provider 
           value={{
             ...this.state,
             fetchFiles: this.fetchFiles,
@@ -58,12 +56,11 @@ onFormSubmit = (e) => {
             onFormSubmit: this.onFormSubmit,
             getFile: this.getFile
           }}>
-          <Files />
-          </ProductContext.Provider>
+          {this.props.children}
+          </FileContext.Provider>
     )
   }
 }
 
-const ProductConsumer = ProductContext.Consumer;
 
-export { ProductProvider, ProductConsumer };
+export default GlobalState

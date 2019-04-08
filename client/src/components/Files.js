@@ -1,12 +1,12 @@
 import React from 'react'
-import { ProductConsumer } from '../context';
+import FilesContext from '../context/files-context';
 import Modal from './modal/Modal'
 
 
 class Files extends React.Component { 
   render() {
     return (
-      <ProductConsumer>
+      <FilesContext.Consumer>
       {(value) => {
         console.log(value.files)
         return (
@@ -29,7 +29,7 @@ class Files extends React.Component {
           </div>
         )
       }}
-      </ProductConsumer>
+      </FilesContext.Consumer>
    )
   }
 }
