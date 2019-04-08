@@ -77,7 +77,6 @@ app.get('/files/:filename', (req, res) => {
 
 app.post('/upload', upload.single('file'), (req,res) => {
     res.json({file: req.file})
-    console.log(req.file)
 })
 
 

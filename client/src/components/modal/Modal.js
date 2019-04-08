@@ -6,12 +6,14 @@ const Modal = (props) => {
   return (
     <FilesContext.Consumer>
       {(value) => {
+        console.log(`http://localhost:5000/files/${value.file}`)
             return ( 
               <>
               {value.toggle && (
                 <div className="modal">
-                  <img src={`http://localhost:5000/files/${value.file}`} /> 
-                
+                  <video width="1280" height="720" autoPlay>
+                    <source src={`http://localhost:5000/files/${value.file}`} type="video/mp4" />
+                  </video>
                   <button onClick={() => value.hideModal()}>HIDE MODAL</button>
                 </div>     
                 )

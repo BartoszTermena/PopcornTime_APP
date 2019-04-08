@@ -10,7 +10,7 @@ const Files = props => {
         <div>
           <form onSubmit={(e) => value.uploadFile(e)}>
             <h1>File Upload</h1>
-            <input type="file" name="file" id="file" onChange={(e) => value.settingFile(e)} />
+            Chose File: <input type="file" name="file" id="file" onChange={(e) => value.settingFile(e)} />
             <button type="submit">Upload</button>
           </form>
             {value.files.map(file => {
@@ -20,6 +20,7 @@ const Files = props => {
                 </div>
               )
             })}
+            {value.isLoading ? <div>Loading...</div> : null}
         </div>
       )
     }}

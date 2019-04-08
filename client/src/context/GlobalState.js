@@ -4,14 +4,16 @@ import FileContext from './files-context'
 
 const GlobalState = props => {
   const [files, setFiles] = useState({files: []})
+  const [uploadedImage, setUploadedImage] = useState(null)
   const [uploadedFile, setUploadedFile] = useState(null)
   const [file, setFile] = useState(null)
   const [toggle, setToggle] = useState(false)
   const [refresh, setRefresh] = useState('fetchAgain');
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchFiles = () => {
     console.log("Fetching")
-    axios.get('/files')
+    axios.get('http://localhost:5000/files')
     .then(res => {
       setFiles({files: res.data})
     })
@@ -32,11 +34,15 @@ const GlobalState = props => {
   const settingFile = (e) => {
     setUploadedFile(e.target.files[0])
   }
+  const settingImage = (e) => {
+    setUploadedImage(e.target.files[0])
+  }
   const getFile = (file) => {
     setFile(file)
     showModal()
   }
   const uploadFile = (e) => {
+    setIsLoading(true)
     e.preventDefault();
     const file = uploadedFile
     const formData = new FormData();
@@ -46,13 +52,15 @@ const GlobalState = props => {
             'content-type': 'multipart/form-data'
         }
     }
-    axios.post('/upload', formData, config)
+    axios.post('http://localhost:5000/upload', formData, config)
     .then(res => {
       console.log(res);
       setRefresh(res)
+      setIsLoading(false)
     })
     .catch(error => {
       console.log(error);
+      setIsLoading(false)
     });
   }
   return (
@@ -61,9 +69,11 @@ const GlobalState = props => {
         ...files,
         uploadedFile,
         file,
+        isLoading,
         toggle,
         fetchFiles: fetchFiles,
         settingFile: settingFile,
+        settingImage: settingImage,
         uploadFile: uploadFile,
         hideModal: hideModal,
         getFile: getFile

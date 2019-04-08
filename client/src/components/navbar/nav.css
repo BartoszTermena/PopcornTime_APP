@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text|Montserrat');
 
 nav {
-    background: #17181b;
-    top: 0;
-    width: 100%;
-    height: 4.5rem;
-    overflow: hidden;
-    position: fixed;
-    font-family: 'Crimson Text', serif;
+  background: #17181b;
+  top: 0;
+  width: 100%;
+  height: 4.7rem;
+  overflow: hidden;
+  position: fixed;
+  font-family: 'Crimson Text', serif;
   }
 ul {
   float: right;
@@ -28,8 +28,8 @@ li:hover{
   color: #fd6140;
 }
 .app-logo {
-    position: absolute;
-    width: auto;
-    height: 67px;
-    padding: 3px 3px;
+  position: absolute;
+  width: auto;
+  height: 67px;
+  padding: 4px 10px;
 }
