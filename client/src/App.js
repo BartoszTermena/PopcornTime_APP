@@ -2,6 +2,7 @@ import React from 'react'
 import GlobalState from './context/GlobalState'
 import Nav from './components/navbar/Nav'
 import Files from './components/Files'
+import Modal from './components/modal/Modal'
 import "./App.css"
 
 const App = props => {
@@ -9,6 +10,7 @@ const App = props => {
     <GlobalState>
       <Nav />
       <Files />
+      <Modal />
     </GlobalState>
   )
 }
