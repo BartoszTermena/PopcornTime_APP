@@ -10,7 +10,8 @@ const UploadFile = () => {
                 <div className="files-container">
                     <form onSubmit={(e) => value.uploadFile(e)}>
                         <h1>File Upload</h1>
-                        Chose File: <input type="file" name="file" id="file" onChange={(e) => value.settingFile(e)} />
+                        Chose File: <input type="file" name="userFile" id="userFile" onChange={(e) => value.settingFile(e)} />
+                        Chose Img: <input type="file" name="userFile" id="userFile" onChange={(e) => value.settingImage(e)} />
                         <button type="submit">Upload</button>
                     </form>
                     {value.isLoading ? <Spinner /> : null}

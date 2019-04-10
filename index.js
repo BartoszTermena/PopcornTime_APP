@@ -45,7 +45,8 @@ const storage = new GridFsStorage({
       });
     }
 });
-const upload = multer({ storage });
+const upload = multer({ storage }).array('userFile', 2);
+
 app.set('view engine', 'ejs')
 app.get('/', (req, res) => {
     res.send("hello")
@@ -74,8 +75,7 @@ app.get('/files/:filename', (req, res) => {
   })
 })
 
-
-app.post('/upload', upload.single('file'), (req,res) => {
+app.post('/upload', upload, (req,res) => {
     res.json({file: req.file})
 })
 

@@ -45,8 +45,10 @@ const GlobalState = props => {
     setIsLoading(true)
     e.preventDefault();
     const file = uploadedFile
+    const img = uploadedImage
     const formData = new FormData();
-    formData.append('file', file)
+    formData.append('userFile', file)
+    formData.append('userFile', img)
     const config = {
         headers: {
             'content-type': 'multipart/form-data'
