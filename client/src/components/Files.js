@@ -1,26 +1,23 @@
 import React from 'react'
 import FilesContext from '../context/files-context';
+import Spinner from '../components/spinner/Spinner'
 
 const Files = props => { 
   return (
     <FilesContext.Consumer>
     {(value) => {
-      
       return (
-        <div>
-          <form onSubmit={(e) => value.uploadFile(e)}>
-            <h1>File Upload</h1>
-            Chose File: <input type="file" name="file" id="file" onChange={(e) => value.settingFile(e)} />
-            <button type="submit">Upload</button>
-          </form>
-            {value.files.map(file => {
+        <div className="files-container">
+            {value.files.length > 0 ? value.files.map(file => {
               return (
                 <div>
                   <a onClick={() => {value.getFile(file.filename)}}>{file.filename}</a>
                 </div>
               )
-            })}
-            {value.isLoading ? <div>Loading...</div> : null}
+            })
+            : <Spinner />
+          }
+           
         </div>
       )
     }}

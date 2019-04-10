@@ -4,3 +4,20 @@ body {
   box-sizing: border-box;
   background: #fbfbfb;
 }
+.container {
+  padding: 4rem 2rem;
+  justify-content: center;
+  text-align: center;
+}
+.files-container {
+  margin-top: 3rem;
+}
+.button-primary {
+  border: none;
+  color: white;
+  background-color: #02befd;
+  padding: 12px 29px;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
